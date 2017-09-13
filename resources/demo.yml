@@ -1,0 +1,25 @@
+---
+# Discovery source config
+discovery-registry : http://AMBARI_HOST:8080
+
+# Provider config reference, the contents of which will be included in, or referenced from, the resulting topology descriptor
+provider-config-ref : resources/ambari-cluster-policy.xml
+
+# The cluster for which the details should be discovered
+cluster: CLUSTER_NAME
+
+# The services to declare in the resulting topology descriptor, whose URLs will be discovered (unless a value is specified)
+services:
+    - name: NAMENODE
+    - name: JOBTRACKER
+    - name: WEBHDFS
+    - name: WEBHCAT
+    - name: OOZIE
+    - name: WEBHBASE
+    - name: HIVE
+    - name: RESOURCEMANAGER
+    - name: AMBARI
+      url: http://AMBARI_HOST:8080
+    - name: AMBARIUI
+      url: http://AMBARI_HOST:8080
+
