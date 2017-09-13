@@ -81,7 +81,6 @@ class TopologyBuilder(object):
 
 	@staticmethod
 	def display_descriptor_contents(simple_descriptor_path, simple_descriptor_content):
-		print '=========== BEGIN: Topology Configuration: ' + simple_descriptor_path + ' :BEGIN ========='
 		print '   Source: ' + simple_descriptor_content.get('discovery-registry')
 		print 'Providers: ' + simple_descriptor_content.get('provider-config-ref')
 		print '  Cluster: ' + simple_descriptor_content.get('cluster')
@@ -92,12 +91,9 @@ class TopologyBuilder(object):
 				print '\t' + service_name + ' (' + s.get('url') + ')'
 			else:
 				print '\t' + service_name + ' (discover)'
-		print '========= END: Topology Configuration: ' + simple_descriptor_path + ' :END ========='
 
 	@staticmethod
 	def display_discovered_service_urls(service_urls):
-		print '=========== BEGIN: Discovered URLs :BEGIN ==========='
 		for service in service_urls:
 			print '{:15} : {}'.format(service[0], service[1])
-		print '============= END: Discovered URLs :END ============='
 
