@@ -69,54 +69,6 @@ def invoke_rest(target_url, username, password):
   return json.loads(content)
 
 
-def print_cluster_component_hosts(cluster):
-    components = cluster.get_components()
-    print '{:_<8} {:_<16} {:_<25} {:_<30}'.format('', '', '', '')
-    print '{:^8} {:^16} {:^25} {:^30}'.format('Cluster', 'Service', 'Component', 'Host(s)')
-    print '{:_<8} {:_<16} {:_<25} {:_<30}'.format('', '', '', '')
-    for comp_name in components:
-        comp = components.get(comp_name)
-        print '{:8} {:16} {:25} {}'.format(comp.get_cluster(), comp.get_service(), comp.get_name(), comp.get_hostnames())
-
-
-def print_cluster_service_configs(cluster):
-    for service_name in cluster.service_config_data:
-        print service_name
-        for config_type in cluster.service_config_data.get(service_name):
-            print '\tconfig type: ' + config_type
-#            print_json(cluster.service_config_data.get(service_name).get(config_type))
-            
-
-def print_cluster_service_siteconfig_properties(cluster):
-    for service_name in cluster.service_config_data:
-        for config_type in cluster.service_config_data.get(service_name):
-            if config_type.endswith('-site'):
-                print service_name + ': ' + config_type
-                config = cluster.service_config_data.get(service_name)
-                print_json(config.get('properties'))
-            
-
-
-def print_cluster_component_configs_of_interest(cluster):
-    for component_name in component_config_property_map:
-            print component_name
-            comps = cluster.get_components()
-            comp = comps.get(component_name)
-            if comp is None:
-                print '  The cluster does not include info about component: ' + component_name
-            else:
-                service_mapping = component_config_property_map.get(component_name)
-                for service in service_mapping:
-                    print '  ' + service
-                    service_configs = service_mapping.get(service)
-                    for config in service_configs:
-                        print '    {}'.format(config)
-                        config_props = service_configs.get(config)
-                        for prop in config_props:
-                            print '      {:36} : {}'.format(prop, comp.get_config_property(prop))
-
-
-
 
 class Cluster(object):
     
